@@ -13,11 +13,7 @@ $(document).ready(function(){
         var percent = parseFloat($("#percent").val());
 
 		amount = (salary * percent / 100).toFixed(2);
-		
-    });
-
-	$("#percent").on("change", function() {		
-        $("#amount").text("$" + amount);
+		$("#amount").text("$" + amount);
     });
 
 });
