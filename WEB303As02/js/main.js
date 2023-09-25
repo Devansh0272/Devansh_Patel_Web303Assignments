@@ -1,28 +1,45 @@
 // WEB303 Assignment 2
 
 
-$(document).ready(function() 
+document.addEventListener('DOMContentLoaded', () => 
 {
-    // Function to load content using AJAX
-    function loadContent(file) {
-      $.ajax({
-        url: file,
-        type: 'GET',
-        dataType: 'html',
-        success: function(data) {
-          // Animate the content
-          $('#content').html(data).slideDown(); // You can choose the animation effect you prefer
-        },
-        error: function() {
-          alert('Error loading content');
+    
+    document.getElementById('content-wrapper').addEventListener('click', function(e) {
+        e.preventDefault(); 
+        
+        
+        const targetId = e.target.id;
+        if (targetId === 'prospect' || targetId === 'convert' || targetId === 'retain') {
+           
+            
+            const targetFile = targetId + '.html';
+
+            
+    
+            const xhr = new XMLHttpRequest();
+
+          
+            xhr.open('GET', targetFile, true);
+
+            
+            xhr.send();
+
+            xhr.onload = function() {
+                if (xhr.status != 200) {
+                    console.error(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+                } else {
+                   
+                    $('#content').fadeOut(250, function() {
+                       
+
+                        document.getElementById('content').innerHTML = xhr.responseText;
+
+                        
+
+                        $('#content').hide().fadeIn(250);
+                    });
+                }
+            };
         }
-      });
-    }
-  
-    // Click event handler for menu links
-    $('.menu-link').on('click', function() {
-      $('#content').slideUp(function() {
-        loadContent($(this).data('file'));
-      });
     });
 });
