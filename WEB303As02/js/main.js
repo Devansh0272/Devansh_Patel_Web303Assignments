@@ -24,17 +24,19 @@ document.addEventListener('DOMContentLoaded', () =>
             
             xhr.send();
 
-            xhr.onload = function() {
-                if (xhr.status != 200) {
+            xhr.onload = function() 
+            {
+                if (xhr.status != 200) 
+                {
                     console.error(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
-                } else {
+                } 
+                else 
+                {
                    
-                    $('#content').fadeOut(250, function() {
-                       
-
+                    $('#content').fadeOut(250, function() 
+                    {
+            
                         document.getElementById('content').innerHTML = xhr.responseText;
-
-                        
 
                         $('#content').hide().fadeIn(250);
                     });
